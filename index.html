@@ -2,285 +2,272 @@
 <html lang="vi">
 
 <head>
+    <meta charset="UTF-8">
 
-<meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,
+                 initial-scale=1.0,
+                 maximum-scale=1.0,
+                 user-scalable=no">
 
-<meta name="viewport"
-      content="width=device-width,
-               initial-scale=1.0,
-               maximum-scale=1.0,
-               user-scalable=no">
+    <title>QR</title>
 
-<title>QR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        /* KHU VỰC SLIDER */
+        .slider {
+            width: 100%;
+            height: 100%;
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #000;
-}
+            display: flex;
 
-/* KHU VỰC SLIDER */
+            overflow-x: scroll;
+            overflow-y: hidden;
 
-.slider {
-    width: 100%;
-    height: 100%;
+            scroll-snap-type: x mandatory;
 
-    display: flex;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
 
-    overflow-x: scroll;
-    overflow-y: hidden;
+        .slider::-webkit-scrollbar {
+            display: none;
+        }
 
-    scroll-snap-type: x mandatory;
+        /* MỖI TRANG */
+        .slide {
+            flex: 0 0 100%;
 
-    scrollbar-width: none;
+            width: 100%;
+            height: 100%;
 
-    -webkit-overflow-scrolling: touch;
-}
+            scroll-snap-align: start;
 
-.slider::-webkit-scrollbar {
-    display: none;
-}
+            display: flex;
 
-/* MỖI TRANG */
+            justify-content: center;
+            align-items: center;
 
-.slide {
-    flex: 0 0 100%;
+            position: relative;
+        }
 
-    width: 100%;
-    height: 100%;
+        /* ẢNH */
+        .slide img {
+            display: block;
 
-    scroll-snap-align: start;
+            width: 100%;
+            height: 100%;
 
-    display: flex;
+            object-fit: contain;
+        }
 
-    justify-content: center;
-    align-items: center;
+        /* THÔNG BÁO KHI ẢNH LỖI */
+        .error {
+            color: white;
 
-    position: relative;
-}
+            font-family: Arial, sans-serif;
+            font-size: 18px;
 
-/* ẢNH */
+            text-align: center;
 
-.slide img {
-    display: block;
+            padding: 20px;
+        }
 
-    width: 100%;
-    height: 100%;
+        /* CÁC CHẤM */
+        .dots {
+            position: fixed;
 
-    object-fit: contain;
-}
+            bottom: 15px;
+            left: 0;
 
-/* THÔNG BÁO KHI ẢNH LỖI */
+            width: 100%;
 
-.error {
-    color: white;
-    font-family: Arial, sans-serif;
-    font-size: 18px;
-    text-align: center;
-    padding: 20px;
-}
+            text-align: center;
 
-/* CÁC CHẤM */
+            z-index: 10;
+        }
 
-.dots {
+        .dot {
+            display: inline-block;
 
-    position: fixed;
+            width: 8px;
+            height: 8px;
 
-    bottom: 15px;
+            margin: 4px;
 
-    left: 0;
+            border-radius: 50%;
 
-    width: 100%;
+            background: rgba(255, 255, 255, 0.45);
 
-    text-align: center;
+            transition: 0.2s;
+        }
 
-    z-index: 10;
+        .dot.active {
+            background: white;
 
-}
-
-.dot {
-
-    display: inline-block;
-
-    width: 8px;
-    height: 8px;
-
-    margin: 4px;
-
-    border-radius: 50%;
-
-    background: rgba(255,255,255,0.45);
-
-    transition: 0.2s;
-
-}
-
-.dot.active {
-
-    background: white;
-
-    transform: scale(1.25);
-
-}
-
-</style>
-
+            transform: scale(1.25);
+        }
+    </style>
 </head>
 
 <body>
 
+    <!-- =========================
+         CÁC TRANG
+    ========================= -->
 
-<!-- =========================
-     CÁC TRANG
-========================= -->
+    <div class="slider" id="slider">
 
-<div class="slider" id="slider">
+        <div class="slide">
+            <img src="1.jpg" alt="Page 1">
+        </div>
 
-    <div class="slide">
-        <img src="1.jpg" alt="Page 1">
+        <div class="slide">
+            <img src="2.jpg" alt="Page 2">
+        </div>
+
+        <div class="slide">
+            <img src="3.jpg" alt="Page 3">
+        </div>
+
+        <div class="slide">
+            <img src="4.jpg" alt="Page 4">
+        </div>
+
+        <div class="slide">
+            <img src="5.jpg" alt="Page 5">
+        </div>
+
+        <div class="slide">
+            <img src="6.jpg" alt="Page 6">
+        </div>
+
+        <div class="slide">
+            <img src="7.jpg" alt="Page 7">
+        </div>
+
+        <div class="slide">
+            <img src="8.jpg" alt="Page 8">
+        </div>
+        <div class="slide">
+            <img src="9.jpg" alt="Page 9">
+        </div>
+
+
     </div>
 
-    <div class="slide">
-        <img src="2.jpg" alt="Page 2">
+
+    <!-- =========================
+         CHẤM CHỈ BÁO
+    ========================= -->
+
+    <div class="dots" id="dots">
+
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+
+
     </div>
 
-    <div class="slide">
-        <img src="3.jpg" alt="Page 3">
-    </div>
 
-    <div class="slide">
-        <img src="4.jpg" alt="Page 4">
-    </div>
+    <script>
+        const slider = document.getElementById("slider");
 
-    <div class="slide">
-        <img src="5.jpg" alt="Page 5">
-    </div>
+        const dots = document.querySelectorAll(".dot");
 
-    <div class="slide">
-        <img src="6.jpg" alt="Page 6">
-    </div>
-
-    <div class="slide">
-        <img src="7.jpg" alt="Page 7">
-    </div>
-
-    <div class="slide">
-        <img src="8.jpg" alt="Page 8">
-    </div>
-
-    
-</div>
+        const slides = document.querySelectorAll(".slide");
 
 
-<!-- =========================
-     CHẤM CHỈ BÁO
-========================= -->
+        /* =========================
+           KIỂM TRA ẢNH
+        ========================= */
 
-<div class="dots" id="dots">
+        document.querySelectorAll(".slide img").forEach(function (img, index) {
 
-    <span class="dot active"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-       
-</div>
+            img.addEventListener("error", function () {
 
+                console.error("Không thể tải ảnh:", img.src);
 
-<script>
+                img.style.display = "none";
 
-const slider = document.getElementById("slider");
+                const message = document.createElement("div");
 
-const dots = document.querySelectorAll(".dot");
+                message.className = "error";
 
-const slides = document.querySelectorAll(".slide");
+                message.innerHTML =
+                    "Không thể tải ảnh " +
+                    (index + 1) +
+                    ".jpg<br><br>" +
+                    "Hãy kiểm tra tên file và vị trí file.";
 
-
-/* =========================
-   KIỂM TRA ẢNH
-========================= */
-
-document.querySelectorAll(".slide img").forEach(function(img, index) {
-
-    img.addEventListener("error", function() {
-
-        console.error("Không thể tải ảnh:", img.src);
-
-        img.style.display = "none";
-
-        const message = document.createElement("div");
-
-        message.className = "error";
-
-        message.innerHTML =
-            "Không thể tải ảnh " + (index + 1) + ".jpg<br><br>" +
-            "Hãy kiểm tra tên file và vị trí file.";
-
-        img.parentElement.appendChild(message);
-
-    });
-
-});
-
-
-/* =========================
-   CẬP NHẬT CHẤM
-========================= */
-
-slider.addEventListener("scroll", function() {
-
-    const page = Math.round(
-        slider.scrollLeft / slider.clientWidth
-    );
-
-    dots.forEach(function(dot, index) {
-
-        dot.classList.toggle(
-            "active",
-            index === page
-        );
-
-    });
-
-});
-
-
-/* =========================
-   CLICK VÀO CHẤM
-========================= */
-
-dots.forEach(function(dot, index) {
-
-    dot.addEventListener("click", function() {
-
-        slider.scrollTo({
-
-            left: index * slider.clientWidth,
-
-            behavior: "smooth"
+                img.parentElement.appendChild(message);
+            });
 
         });
 
-    });
 
-});
+        /* =========================
+           CẬP NHẬT CHẤM
+        ========================= */
+
+        slider.addEventListener("scroll", function () {
+
+            const page = Math.round(
+                slider.scrollLeft / slider.clientWidth
+            );
+
+            dots.forEach(function (dot, index) {
+
+                dot.classList.toggle(
+                    "active",
+                    index === page
+                );
+
+            });
+
+        });
 
 
-</script>
+        /* =========================
+           CLICK VÀO CHẤM
+        ========================= */
 
+        dots.forEach(function (dot, index) {
+
+            dot.addEventListener("click", function () {
+
+                slider.scrollTo({
+
+                    left: index * slider.clientWidth,
+
+                    behavior: "smooth"
+
+                });
+
+            });
+
+        });
+    </script>
 
 </body>
 
